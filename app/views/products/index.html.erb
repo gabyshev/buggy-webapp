@@ -1,33 +1,50 @@
-<h1>Listing products</h1>
+<div class="row">
+  <div class="well">
+    <h1 class="text-center">Products</h1>
+    <div class="clearfix">
+      <%= link_to 'New Product', new_product_path, class: 'btn btn-success pull-right' %>
+      <br/>
+      <br/>
+    </div>
+    <div class="list-group">
+      <% @products.each do |product| %>
+        <div class="list-group-item">
+          <div class="media col-md-3">
+            <figure class="pull-left">
+              <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+            </figure>
+          </div>
+          <div class="col-md-6">
+            <h4 class="list-group-item-heading"><%= product.title %></h4>
+            <p class="list-group-item-text"><%= product.description %></p>
+            <br/><br/>
+            <ul class="list-inline">
+              <li>
+            <%= link_to 'Show me more', product_path(product), class: "btn btn-default inline" %>
+              </li>
+              <li>
+            <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-defaul inline' %>
+              </li>
+              <li>
+            <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default inline' %>
+              </li>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Category</th>
-      <th>Pre-owned</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-        <td><%= product.category %></td>
-        <td><%= product.pre-owned %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <% if product.preowned %>
+              <span class="label label-warning">Pre-owned</span>
+            <% else %>
+              <span class="label label-success">New</span>
+            <% end %>
+            <address>
+              <strong>Category: </strong><%= product.category %><br>
+              <strong>Price: </strong><%= product.price %> $<br>
+            </address>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

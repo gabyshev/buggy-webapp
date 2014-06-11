@@ -8,13 +8,31 @@
 </head>
 <body>
   <div class="container">
-    <div id="user_nav">
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path %>
-      <% end %>
+    <div class="row">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <%= link_to 'Awesome shop', root_path, class: 'navbar-brand' %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-user"></i>
+                  <strong><%= current_user.email %></strong>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li><%= link_to 'Sign in', new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+
     </div>
     <%= render "layouts/messages" %>
     <%= yield %>
