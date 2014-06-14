@@ -1,6 +1,16 @@
-<h1>Editing product</h1>
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="title"><strong>Editing product</strong></h3>
+    </div>
+    <div class="panel-body">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
+<div class="col-md-12 text-center">
+  <%= link_to 'Show', @product %> |
+  <%= link_to 'Back', products_path %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+</div>

@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control', rows: 6 %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :price %><br>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :category %><br>
-    <%= f.text_field :category %>
+    <%= f.text_field :category, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :preowned %><br>
     <%= f.check_box :preowned %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-default btn-bg' %>
   </div>
 <% end %>
