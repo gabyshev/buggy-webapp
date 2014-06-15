@@ -2,7 +2,9 @@
   <div class="well">
     <h1 class="text-center">Products</h1>
     <div class="clearfix">
-      <%= link_to 'New Product', new_product_path, class: 'btn btn-success pull-right' %>
+      <% if can? :create, Product %>
+        <%= link_to 'New Product', new_product_path, class: 'btn btn-success pull-right' %>
+      <% end %>
       <br/>
       <br/>
     </div>
@@ -19,16 +21,13 @@
             <p class="list-group-item-text"><%= product.description %></p>
             <br/><br/>
             <ul class="list-inline">
-              <li>
-            <%= link_to 'Show me more', product_path(product), class: "btn btn-default inline" %>
-              </li>
-              <li>
-            <%= link_to 'Edit', edit_product_path(product), class: 'btn btn-defaul inline' %>
-              </li>
-              <li>
-            <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default inline' %>
-              </li>
-
+              <li><%= link_to 'Show me more', product_path(product), class: "btn btn-default inline" %></li>
+              <% if can? :update, product %>
+                <li><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-defaul inline' %></li>
+              <% end %>
+              <% if can? :destroy, product %>
+                <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default inline' %></li>
+              <% end %>
             </ul>
           </div>
           <div class="col-md-3">
