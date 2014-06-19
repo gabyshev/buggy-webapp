@@ -7,11 +7,14 @@ class Ability
       can :destroy, :all
     else
       can :read, :all
-      can :update, Product do
-        |product| product.try(:user) == user || user.role?(:moderator)
+      can :update, Product do |product|
+        product.try(:user) == user || user.role?(:moderator)
       end
       if user.role?(:author)
         can :create, Product
+        can :delete, Product do |product|
+          product.try(:user) == user || user.role?(:moderator)
+        end
       end
     end
     # Define abilities for the passed in user here. For example:

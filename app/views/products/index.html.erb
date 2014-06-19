@@ -26,7 +26,10 @@
                 <li><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-defaul inline' %></li>
               <% end %>
               <% if can? :destroy, product %>
-                <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default inline' %></li>
+                <li><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure? It will completely wip out the record' }, class: 'btn btn-default inline' %></li>
+              <% end %>
+              <% if can? :delete, product %>
+                <li><%= link_to 'Delete', delete_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-default inline' %></li>
               <% end %>
             </ul>
           </div>
@@ -35,6 +38,9 @@
               <span class="label label-warning">Pre-owned</span>
             <% else %>
               <span class="label label-success">New</span>
+            <% end %>
+            <% if product.deleted %>
+              <span class="label label-danger">Marked as deleted</span>
             <% end %>
             <address>
               <strong>Category: </strong><%= product.category %><br>
@@ -45,5 +51,12 @@
         </div>
       <% end %>
     </div>
+  </div>
+</div>
+<div id="footer">
+  <div class="container">
+    <p class="text-center text-muted">
+      <a href="about">About us</a>
+    </p>
   </div>
 </div>

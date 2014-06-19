@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = if current_user.try(:role) == "admin"
+      Product.all
+    else
+      Product.where(deleted: false)
+    end
   end
 
   # GET /products/1
@@ -60,6 +64,13 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delete
+    set_product
+    @product.deleted = true
+    @product.save
+    redirect_to products_url, notice: 'Product was successfully deleted'
   end
 
   private
